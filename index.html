@@ -1,27 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Word Guess Game</title>
-    <!-- Reset Style Sheet -->
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <title>Matrix Guess Game</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+
+
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
+
 <body>
-    <h1 id="message"></h1>
 
-    <div id="word"></div>
+    <div class="container-fluid wrapper">
+        <div class="logo row">
+            <div class="col-md-6">
+                <img src="assets/images/matrixlogo.png" class="img-fluid"/>
+            </div>
+            <div class="col-md-6">
+                <h1 class="mt-5">GUESS GAME</h1>
+                <p>Matrix Movie Characters</p>
+                <button onclick="playAudio()" type="button" class="btn btn-sm btn-success">Play Audio</button>
+<button onclick="pauseAudio()" type="button" class="btn btn-sm btn-danger">Pause Audio</button> 
+            </div>
+        </div>
 
-    <br><br>
-    Bad Guesses: 
-    <div id="badguess"></div>
+        <div id="word" class="mb-5"></div>
 
+        <div id="instructions">
+
+                   <h1 id="message" class="my-4">PICK AN ALPHABET TO START</h1>
+                   <h4 id="submessage" class="my-3">USE YOUR KEYBOARD</h1>
+
+        </div>
+        
+
+        <div class="row my-5">
+            <div class="col-md-6">
+                LIVES LEFT : <span id="lives"></span>
+            </div>
+            <div class="col-md-6">
+                    BAD GUESSES :
+                    <span id="badguess"></span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="character d-none d-sm-none d-md-block"><img src="assets/images/Neo.png" class="img-fluid"></div>
+    
+    
+    <audio id="playAudioFile" autoplay>
+            <source src="assets/audio/matrixtheme.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+    </audio>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
     <!-- Game Java Script -->
     <script src="assets/js/game.js"></script>
-
 </body>
+
 </html>

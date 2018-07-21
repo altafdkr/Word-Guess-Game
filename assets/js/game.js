@@ -1,16 +1,5 @@
-// Number of Lives
+// Initialize lives array with 5 lives
 var lives = 5;
-
-// Get element div from html
-var messageDiv = document.getElementById("message");
-var badGuessDiv = document.getElementById("badguess");
-
-// Set words array
-var words = ["alpha", "beta", "gamma"];
-
-// Select random word from array
-var word = words[Math.floor(Math.random()*words.length)].toUpperCase();
-
 
 // Array for All Letters Picked
 var pickedLetters =[];
@@ -22,26 +11,76 @@ var goodGuess =[];
 var badGuess =[];
 
 
-// for loop to count characters and create spots for each letter
-for (i=0; i < word.length; i++) {
+// Get element div from html
+var wordDiv = document.getElementById("word");
+var messageDiv = document.getElementById("message");
+var submessageDiv = document.getElementById("submessage");
+var livesDiv = document.getElementById("lives");
+var badGuessDiv = document.getElementById("badguess");
+
+
+
+// Set words array
+var words = ["MORPHEUS", "NEO", "TRINITY", "APOC", "ORACLE", "TANK", "CYPHER", "DOZER", "MOUSE"];
+
+// Select random word from array
+var word = words[Math.floor(Math.random()*words.length)].toUpperCase();
+
+
+// Get Audio Element
+var playaudio = document.getElementById("playAudioFile");
+
+
+
+// Intializes game on first load
+startGame();
+
+
+function startGame() {
+
+    // Reset Word Div
+    wordDiv.innerHTML = "";
+
+    // Number of Lives
+    lives = 5;
+    livesDiv.innerHTML = lives;
+
+    // Array for All Letters Picked
+    pickedLetters =[];
+
+    // Array for Good Guess
+    goodGuess =[];
+
+    // Selected Letters
+    badGuess =[];
+    badGuessDiv.innerHTML = "";
+
+    // Select random word from array
+    word = words[Math.floor(Math.random()*words.length)].toUpperCase();
+
+    // for loop to count characters and create spots for each letter
+    for (i=0; i < word.length; i++) {
 
     // Create new element <span>
     var letter = document.createElement("span");
 
     // Add _ to its HTML
-    letter.innerHTML += "_ ";
+    letter.innerHTML += "_";
 
     // Set the position of the letter in the word
     letter.setAttribute("id", i);
 
+    // Set class for the letter
+    letter.setAttribute("class", "letter");
+
     // Get element div from html
-    var wordDiv = document.getElementById("word");
+    wordDiv = document.getElementById("word");
 
     // Add span for each letter in the div
     wordDiv.appendChild(letter);
+    }
 }
 
-console.log(wordDiv);
 
 // When User presses a key
 document.onkeyup = function(event) {
@@ -58,6 +97,7 @@ document.onkeyup = function(event) {
         // If already guessed, then notify user and stop.
         if (!alreadyPicked) {
             messageDiv.textContent = "Letter already picked!";
+            submessageDiv.textContent = "AGENT SMITH: Never send a human to do a machine's job.";
             return;
         } 
 
@@ -68,6 +108,7 @@ document.onkeyup = function(event) {
 
             // Notify user they picked a wrong letter
             messageDiv.textContent = "Bad Guess!";
+            submessageDiv.textContent = "AGENT SMITH: I'm going to enjoy watching you die, Mr. Anderson.";
 
             // Update picked letters array
             pickedLetters.push(userGuess);
@@ -76,15 +117,19 @@ document.onkeyup = function(event) {
             badGuess.push(userGuess);
 
             // Append letter to Bad Guess Div
-            badGuessDiv.innerHTML += userGuess + " ";
+            badGuessDiv.innerHTML += userGuess;
 
             // Reduce life
             lives--;
+
+            // Display updated lives
+            livesDiv.innerHTML = lives;
 
             // Check if user has used all lives and has lost
             if (lives == 0) {
                 // Notify user they lost and reset
                 messageDiv.textContent = "YOU LOSE!";
+                submessageDiv.innerHTML = "MORPHEUS: Do you believe that my being stronger or faster has anything to do with my muscles in this place?<br><br><p><button class=\"btn btn-success\" onclick=\"startGame()\">Restart Game</button></p>";
             }
 
         } else {
@@ -93,6 +138,7 @@ document.onkeyup = function(event) {
 
             // Notify User they picked a correct letter
             messageDiv.textContent = "GOOD PICK!";
+            submessageDiv.textContent = "Neo: What are you trying to tell me? That I can dodge bullets?";
 
             // Update picked letters array
             pickedLetters.push(userGuess);
@@ -105,7 +151,7 @@ document.onkeyup = function(event) {
                     var letterLocation = this.getElementById(i);
 
                     // Update element with the letter
-                    letterLocation.innerHTML = userGuess + " ";
+                    letterLocation.innerHTML = userGuess;
 
                     // Update picked letters array
                     pickedLetters.push(userGuess);
@@ -116,6 +162,7 @@ document.onkeyup = function(event) {
                     // Notify user they won and reset
                     if (goodGuess.length == word.length) {
                         messageDiv.textContent = "YOU WON!";
+                        submessageDiv.innerHTML = "NEO: I know you're out there. I can feel you now.<br><br><p><button class=\"btn btn-success\" onclick=\"startGame()\">Restart Game</button></p>";
                     } 
 
                 }
@@ -136,10 +183,18 @@ function checkAlreadyPicked(letter) {
     if (pickedLetters.indexOf(letter) < 0) {
         // Returns true if picked
         return true;
-    } else
-    {
+    } else {
         // Returns false if not picked
         return false
     }
 }
+
+// Functions to Play and Pause Audio
+function playAudio() { 
+    playaudio.play(); 
+} 
+
+function pauseAudio() { 
+    playaudio.pause(); 
+} 
 

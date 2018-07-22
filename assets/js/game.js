@@ -17,6 +17,7 @@ var messageDiv = document.getElementById("message");
 var submessageDiv = document.getElementById("submessage");
 var livesDiv = document.getElementById("lives");
 var badGuessDiv = document.getElementById("badguess");
+var audiobtnsDiv = document.getElementById("audiobtns");
 
 
 
@@ -34,14 +35,20 @@ var playaudio = document.getElementById("playAudioFile");
 // Initialize Game On Variable to make game active
 var gameOn = true;
 
-// Intializes game on first load
-startGame();
+// Play Audio - On(default) and Off
+var playaudiotoggle = true;
+
+
 
 
 function startGame() {
 
     // Make Game Active
     gameOn = true;
+
+    if (playaudiotoggle == true) {
+        playAudio(); 
+    }
 
     // Reset Word Div
     wordDiv.innerHTML = "";
@@ -208,10 +215,12 @@ function checkAlreadyPicked(letter) {
 
 // Functions to Play and Pause Audio
 function playAudio() { 
-    playaudio.play(); 
+    playaudio.play();
+    audiobtnsDiv.innerHTML = "<button onclick=\"pauseAudio()\" type=\"button\" class=\"btn btn-sm btn-danger\">Pause Audio</button>";  
 } 
 
 function pauseAudio() { 
-    playaudio.pause(); 
+    playaudio.pause();
+    audiobtnsDiv.innerHTML = "<button onclick=\"playAudio()\" type=\"button\" class=\"btn btn-sm btn-success\">Play Audio</button>"; 
 } 
 

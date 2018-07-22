@@ -33,7 +33,7 @@ var playaudio = document.getElementById("playAudioFile");
 
 
 // Initialize Game On Variable to make game active
-var gameOn = true;
+var gameOn = false;
 
 // Play Audio - On(default) and Off
 var playaudiotoggle = true;
@@ -45,8 +45,8 @@ function startGame() {
 
     // Make Game Active
     gameOn = true;
-
-    if (playaudiotoggle == true) {
+    
+    if (playaudiotoggle) {
         playAudio(); 
     }
 
@@ -101,7 +101,7 @@ function startGame() {
 // When User presses a key
 document.onkeyup = function(event) {
 
-    if (gameOn == true) {
+    if (gameOn) {
 
     // Check if user entered a letter (A - Z)
     if (event.keyCode >= 65 && event.keyCode <= 90) {
@@ -216,11 +216,17 @@ function checkAlreadyPicked(letter) {
 // Functions to Play and Pause Audio
 function playAudio() { 
     playaudio.play();
+    playaudiotoggle = true;
+
+    // Display pause audio button
     audiobtnsDiv.innerHTML = "<button onclick=\"pauseAudio()\" type=\"button\" class=\"btn btn-sm btn-danger\">Pause Audio</button>";  
 } 
 
 function pauseAudio() { 
     playaudio.pause();
+    playaudiotoggle = false;
+    
+    // Display play audio button
     audiobtnsDiv.innerHTML = "<button onclick=\"playAudio()\" type=\"button\" class=\"btn btn-sm btn-success\">Play Audio</button>"; 
 } 
 

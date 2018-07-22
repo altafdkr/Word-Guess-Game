@@ -31,6 +31,8 @@ var word = words[Math.floor(Math.random()*words.length)].toUpperCase();
 var playaudio = document.getElementById("playAudioFile");
 
 
+// Initialize Game On Variable to make game active
+var gameOn = true;
 
 // Intializes game on first load
 startGame();
@@ -38,8 +40,15 @@ startGame();
 
 function startGame() {
 
+    // Make Game Active
+    gameOn = true;
+
     // Reset Word Div
     wordDiv.innerHTML = "";
+
+    // Reset Message and submessage div
+    messageDiv.innerHTML = "PICK AN ALPHABET TO START";
+    submessageDiv.innerHTML = "USE YOUR KEYBOARD";
 
     // Number of Lives
     lives = 5;
@@ -84,6 +93,8 @@ function startGame() {
 
 // When User presses a key
 document.onkeyup = function(event) {
+
+    if (gameOn == true) {
 
     // Check if user entered a letter (A - Z)
     if (event.keyCode >= 65 && event.keyCode <= 90) {
@@ -130,6 +141,7 @@ document.onkeyup = function(event) {
                 // Notify user they lost and reset
                 messageDiv.textContent = "YOU LOSE!";
                 submessageDiv.innerHTML = "MORPHEUS: Do you believe that my being stronger or faster has anything to do with my muscles in this place?<br><br><p><button class=\"btn btn-success\" onclick=\"startGame()\">Restart Game</button></p>";
+                gameOn = false;
             }
 
         } else {
@@ -163,6 +175,7 @@ document.onkeyup = function(event) {
                     if (goodGuess.length == word.length) {
                         messageDiv.textContent = "YOU WON!";
                         submessageDiv.innerHTML = "NEO: I know you're out there. I can feel you now.<br><br><p><button class=\"btn btn-success\" onclick=\"startGame()\">Restart Game</button></p>";
+                        gameOn = false;
                     } 
 
                 }
@@ -171,9 +184,13 @@ document.onkeyup = function(event) {
         }
 
 
-    } else {
+        } else {
         // Notify user they did not select a letter
         messageDiv.textContent = "Invalid Selection. Pick a Letter!";
+        } 
+    }
+    else {
+        startGame();
     }
 
 }

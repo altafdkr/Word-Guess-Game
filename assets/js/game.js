@@ -147,7 +147,7 @@ document.onkeyup = function(event) {
             if (lives == 0) {
                 // Notify user they lost and reset
                 messageDiv.textContent = "YOU LOSE!";
-                submessageDiv.innerHTML = "MORPHEUS: Do you believe that my being stronger or faster has anything to do with my muscles in this place?<br><br><p><button class=\"btn btn-success\" onclick=\"startGame()\">Restart Game</button></p>";
+                submessageDiv.innerHTML = "Correct Answer: " + word + "<br><br>MORPHEUS: Do you believe that my being stronger or faster has anything to do with my muscles in this place?<br><br><p><button class=\"btn btn-success\" onclick=\"startGame()\">Restart Game</button></p>";
                 gameOn = false;
             }
 
